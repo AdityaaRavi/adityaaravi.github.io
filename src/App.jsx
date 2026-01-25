@@ -18,6 +18,71 @@ function App() {
     }, 1000)
   }, [])
 
+  useEffect(() => {
+    let frameId = null
+    let timeoutId = null
+    let currentX = window.innerWidth / 2
+    let currentY = window.innerHeight / 2
+    let targetX = currentX
+    let targetY = currentY
+    let width = window.innerWidth
+    let height = window.innerHeight
+
+    const updateSize = () => {
+      width = window.innerWidth
+      height = window.innerHeight
+    }
+
+    const handleMove = (event) => {
+      const point = event.touches?.[0] || event
+      targetX = point.clientX
+      targetY = point.clientY
+
+      document.documentElement.style.setProperty('--activity', '1')
+      if (timeoutId) {
+        window.clearTimeout(timeoutId)
+      }
+      timeoutId = window.setTimeout(() => {
+        document.documentElement.style.setProperty('--activity', '0')
+      }, 800)
+    }
+
+    const animate = () => {
+      const ease = 0.06
+      currentX += (targetX - currentX) * ease
+      currentY += (targetY - currentY) * ease
+
+      const dx = currentX - width / 2
+      const dy = currentY - height / 2
+
+      document.documentElement.style.setProperty('--mouse-x', `${currentX}px`)
+      document.documentElement.style.setProperty('--mouse-y', `${currentY}px`)
+      document.documentElement.style.setProperty('--parallax-x', `${dx * 0.04}px`)
+      document.documentElement.style.setProperty('--parallax-y', `${dy * 0.04}px`)
+      document.documentElement.style.setProperty('--parallax-x-2', `${dx * 0.08}px`)
+      document.documentElement.style.setProperty('--parallax-y-2', `${dy * 0.08}px`)
+      document.documentElement.style.setProperty('--parallax-x-3', `${dx * 0.12}px`)
+      document.documentElement.style.setProperty('--parallax-y-3', `${dy * 0.12}px`)
+
+      frameId = window.requestAnimationFrame(animate)
+    }
+
+    document.documentElement.style.setProperty('--activity', '0')
+
+    window.addEventListener('pointermove', handleMove, { passive: true })
+    window.addEventListener('resize', updateSize)
+    frameId = window.requestAnimationFrame(animate)
+
+    return () => {
+      window.cancelAnimationFrame(frameId)
+      if (timeoutId) {
+        window.clearTimeout(timeoutId)
+      }
+      window.removeEventListener('pointermove', handleMove)
+      window.removeEventListener('resize', updateSize)
+    }
+  }, [])
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-dark-bg flex items-center justify-center">
@@ -34,8 +99,59 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-dark-bg">
-      <Navbar />
+    <div className="min-h-screen bg-dark-bg relative overflow-hidden">
+      <div className="interactive-bg" aria-hidden="true">
+        <div className="grid-layer grid-layer--near" />
+        <div className="grid-layer grid-layer--mid" />
+        <div className="grid-layer grid-layer--far" />
+        <div className="cloud cloud--one" />
+        <div className="cloud cloud--two" />
+        <svg className="motif motif--nn" viewBox="0 0 220 140" aria-hidden="true">
+          <circle cx="20" cy="20" r="6" />
+          <circle cx="20" cy="70" r="6" />
+          <circle cx="20" cy="120" r="6" />
+          <circle cx="110" cy="45" r="6" />
+          <circle cx="110" cy="95" r="6" />
+          <circle cx="200" cy="30" r="6" />
+          <circle cx="200" cy="110" r="6" />
+          <path d="M26 20 L104 45 L26 70 L104 95 L26 120" />
+          <path d="M116 45 L194 30 M116 45 L194 110 M116 95 L194 30 M116 95 L194 110" />
+        </svg>
+        <svg className="motif motif--wave" viewBox="0 0 260 120" aria-hidden="true">
+          <path d="M0 60 C30 20, 60 100, 90 60 C120 20, 150 100, 180 60 C210 20, 240 100, 260 60" />
+        </svg>
+        <svg className="motif motif--lock" viewBox="0 0 140 140" aria-hidden="true">
+          <rect x="35" y="60" width="70" height="55" rx="12" />
+          <path d="M50 60 V40 C50 26, 60 16, 70 16 C80 16, 90 26, 90 40 V60" />
+          <circle cx="70" cy="86" r="7" />
+          <path d="M70 93 V104" />
+        </svg>
+      </div>
+      {/* <Navbar /> */}
+      <main className="relative z-10 min-h-[70vh] flex items-center justify-center px-6 py-16">
+        <div className="max-w-3xl text-center space-y-6">
+          <h1 className="text-3xl sm:text-5xl font-semibold text-text-primary leading-tight">
+            Hi 👋, this is Adityaa Ravi.
+          </h1>
+          <p className="text-text-secondary text-lg sm:text-xl">
+            I am a software engineer and AI researcher, driven by curiosity for the cutting
+            edge of technology.
+          </p>
+          <p className="text-text-secondary text-base sm:text-lg">
+            This website is still in progress. Meanwhile, check out my LinkedIn page — it is
+            currently the best way to know what I am up to.
+          </p>
+          <a
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-dark-bg font-semibold hover:opacity-90 transition"
+            href="https://linkedin.com/in/adityaaravi6"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Visit LinkedIn
+          </a>
+        </div>
+      </main>
+      {/*
       <main>
         <Hero />
         <About />
@@ -44,6 +160,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      */}
     </div>
   )
 }
