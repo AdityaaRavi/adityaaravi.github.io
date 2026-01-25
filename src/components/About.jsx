@@ -94,7 +94,7 @@ const About = () => {
           className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16"
         >
           {[
-            { number: '3+', label: 'Years Experience' },
+            { number: '2+', label: 'Years Experience' },
             { number: '20+', label: 'Services Migrated (Jenkins → Harness)' },
             { number: '10+', label: 'Cross-team Launches' },
             { number: '2', label: 'Interns Mentored' },
