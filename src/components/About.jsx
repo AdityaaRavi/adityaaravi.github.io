@@ -1,13 +1,13 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Code, Database, Server, Brain, Cloud } from 'lucide-react'
+import { Code, Server, Brain, Users } from 'lucide-react'
 
 const About = () => {
   const skills = [
-    { name: 'Backend & Platform Engineering', icon: Server, description: 'Microservices, APIs, Java/Spring, Node.js' },
-    { name: 'Data & AI', icon: Brain, description: 'Python, PyTorch, NLP (XCS224N), LLM tooling' },
-    { name: 'Frontend Engineering', icon: Code, description: 'React, TypeScript, Tailwind, design systems' },
-    { name: 'Cloud & DevOps', icon: Cloud, description: 'AWS, Docker, CI/CD (Harness, Jenkins)' },
+    { name: 'Identity & Platform Systems', icon: Server, description: 'System-of-record services, reliability, secure data flows' },
+    { name: 'AI & Research', icon: Brain, description: 'ML for code completion, static analysis, and learning tools' },
+    { name: 'Full-Stack Engineering', icon: Code, description: 'React, Node.js, Spring, production UX' },
+    { name: 'Leadership & Community', icon: Users, description: 'Student organizations, mentorship, and builder ecosystems' },
   ]
 
   return (
@@ -23,9 +23,9 @@ const About = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-text-primary mb-4">
             About <span className="gradient-text">Me</span>
           </h2>
-          <p className="text-text-secondary text-lg max-w-2xl mx-auto">
-            Software Engineer on PayPal’s Identity Platform
-          </p>
+          {/* <p className="text-text-secondary text-lg max-w-2xl mx-auto">
+            Software Engineer • AI Researcher • Builder
+          </p> */}
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -37,17 +37,21 @@ const About = () => {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-semibold text-text-primary mb-4">
-              Who I Am
-            </h3>
             <p className="text-text-secondary leading-relaxed">
-              I’m Adityaa Ravi, a platform-leaning software engineer who loves turning ambiguous problems into production systems. At PayPal’s Identity Platform, I’ve worked across compliance, reliability, and developer experience—from ensuring UK vulnerability-tracking compliance to shaving onboarding latency and migrating 20+ microservices from Jenkins to Harness.
+              I&apos;m currently a Software Engineer on the Identity team at PayPal, building
+              high-traffic backend services that serve as the system of record for user data.
+              I&apos;m passionate about AI and full-stack development, and I love exploring how
+              technology can create meaningful impact.
             </p>
             <p className="text-text-secondary leading-relaxed">
-              I graduated from UC Davis with honors, receiving the Outstanding Senior Award and the Outstanding Performance Award, and appeared on the Dean’s List multiple times. Beyond coursework, I led student organizations such as SacHacks, GDSC, and the CS Tutoring Club, where I built both technical and leadership foundations that continue to shape my career.
+              I graduated with honors from the University of California, Davis in Spring 2024
+              with a degree in Computer Science and Engineering. Along the way, I received the
+              <a href="https://cs.ucdavis.edu/news/outstanding-senior-spotlight-adityaa-ravi" className="gradient-text"> Outstanding Senior Award </a> 
+              from the College of Engineering and the Outstanding Performance Award from the Computer Science Department.
             </p>
             <p className="text-text-secondary leading-relaxed">
-              I enjoy clean, maintainable code, thoughtful APIs, and measurable impact. Recently I’ve been deepening skills in NLP/LLMs (Stanford XCS224N), platform reliability, and practical ML. I’ve mentored interns, partnered with 10+ cross-functional teams, and I’m always excited to build with great people.
+              Beyond coursework, inspiring others to forge their path in Computer Science is close to my heart, 
+              leading me to spearhead multiple student organizations including <a href="https://sachacks.io" className="gradient-text">SacHacks</a>, <a href="https://www.instagram.com/gdscucd/" className="gradient-text">Google Developer Group on Campus at UC Davis</a> (also known as Google Developer Student Club), and the <a href="https://www.cstutoringatdavis.com" className="gradient-text">CS Tutoring Club at UC Davis</a>.
             </p>
           </motion.div>
 
@@ -84,38 +88,6 @@ const About = () => {
             ))}
           </motion.div>
         </div>
-
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16"
-        >
-          {[
-            { number: '2+', label: 'Years Experience' },
-            { number: '20+', label: 'Services Migrated (Jenkins → Harness)' },
-            { number: '10+', label: 'Cross-team Launches' },
-            { number: '2', label: 'Interns Mentored' },
-          ].map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.1 * index }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">
-                {stat.number}
-              </div>
-              <div className="text-text-secondary text-sm">
-                {stat.label}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
     </section>
   )

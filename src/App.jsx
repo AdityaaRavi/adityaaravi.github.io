@@ -127,31 +127,7 @@ function App() {
           <path d="M70 93 V104" />
         </svg>
       </div>
-      {/* <Navbar /> */}
-      <main className="relative z-10 min-h-[70vh] flex items-center justify-center px-6 py-16">
-        <div className="max-w-3xl text-center space-y-6">
-          <h1 className="text-3xl sm:text-5xl font-semibold text-text-primary leading-tight">
-            Hi 👋, this is Adityaa Ravi.
-          </h1>
-          <p className="text-text-secondary text-lg sm:text-xl">
-            I am a software engineer and AI researcher, driven by curiosity for the cutting
-            edge of technology.
-          </p>
-          <p className="text-text-secondary text-base sm:text-lg">
-            This website is still in progress. Meanwhile, check out my LinkedIn page — it is
-            currently the best way to know what I am up to.
-          </p>
-          <a
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-dark-bg font-semibold hover:opacity-90 transition"
-            href="https://linkedin.com/in/adityaaravi6"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Visit LinkedIn
-          </a>
-        </div>
-      </main>
-      {/*
+      <Navbar />
       <main>
         <Hero />
         <About />
@@ -160,7 +136,6 @@ function App() {
         <Contact />
       </main>
       <Footer />
-      */}
     </div>
   )
 }

@@ -1,12 +1,11 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Twitter, Instagram, Heart } from 'lucide-react'
+import { Github, Linkedin, Heart } from 'lucide-react'
 
 const Footer = () => {
   const socialLinks = [
     { icon: Github, href: 'https://github.com/adityaaravi', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com/in/adityaaravi6', label: 'LinkedIn' },
-    { icon: Instagram, href: 'https://instagram.com/adityaaravi6', label: 'Instagram' }
+    { icon: Linkedin, href: 'https://linkedin.com/in/adityaaravi6', label: 'LinkedIn' }
   ]
 
   const currentYear = new Date().getFullYear()
@@ -27,7 +26,7 @@ const Footer = () => {
               Adityaa Ravi
             </h3>
             <p className="text-text-secondary text-sm max-w-md">
-              Software Engineer at PayPal | UC Davis alum | Exploring AI, platforms, and impactful systems.
+              Software Engineer on PayPal&apos;s Identity team | UC Davis alum | Exploring AI, systems, and impact.
             </p>
           </motion.div>
 
