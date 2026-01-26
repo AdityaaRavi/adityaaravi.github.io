@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
 
@@ -9,6 +9,7 @@ const Highlights = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const preloaded = useRef(new Set())
 
   useEffect(() => {
     let isMounted = true
@@ -52,6 +53,29 @@ const Highlights = () => {
 
     return () => window.clearInterval(intervalId)
   }, [isPaused, photos.length])
+
+  useEffect(() => {
+    if (photos.length === 0) return
+
+    photos.forEach((photo) => {
+      const src = photo?.src
+      if (!src || preloaded.current.has(src)) return
+      const img = new Image()
+      img.src = src
+      preloaded.current.add(src)
+    })
+  }, [photos])
+
+  useEffect(() => {
+    if (photos.length === 0) return
+    const nextIndex = (currentIndex + 1) % photos.length
+    const nextSrc = photos[nextIndex]?.src
+    if (!nextSrc || preloaded.current.has(nextSrc)) return
+
+    const img = new Image()
+    img.src = nextSrc
+    preloaded.current.add(nextSrc)
+  }, [currentIndex, photos])
 
   const handlePrev = () => {
     if (photos.length === 0) return
