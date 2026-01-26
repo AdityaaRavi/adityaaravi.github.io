@@ -123,24 +123,6 @@ const Experience = () => {
             ))}
           </div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-16 text-center"
-        >
-          <div className="glass-card p-8 rounded-xl max-w-2xl mx-auto">
-            <h3 className="text-2xl font-semibold text-text-primary mb-4">
-              Focused on ownership and reliability
-            </h3>
-            <p className="text-text-secondary leading-relaxed">
-              I thrive in fast-moving teams that value ownership, and I enjoy building systems that
-              scale cleanly with thoughtful engineering choices.
-            </p>
-          </div>
-        </motion.div>
       </div>
     </section>
   )

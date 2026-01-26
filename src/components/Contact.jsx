@@ -5,16 +5,16 @@ import { Mail, Linkedin, Github } from 'lucide-react'
 const Contact = () => {
   const contactInfo = [
     {
-      icon: Mail,
-      title: 'Email',
-      value: 'adityaaravi6@gmail.com',
-      link: 'mailto:adityaaravi6@gmail.com'
-    },
-    {
       icon: Linkedin,
       title: 'LinkedIn',
       value: 'linkedin.com/in/adityaaravi6',
       link: 'https://www.linkedin.com/in/adityaaravi6/'
+    },
+    {
+      icon: Github,
+      title: 'GitHub',
+      value: 'github.com/adityaaravi',
+      link: 'https://github.com/adityaaravi'
     }
   ]
 
@@ -103,33 +103,6 @@ const Contact = () => {
                 Email Me
               </motion.a>
             </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              viewport={{ once: true }}
-              className="glass-card p-6 rounded-xl"
-            >
-              <h4 className="text-lg font-semibold text-text-primary mb-4">
-                Follow Along
-              </h4>
-              <div className="flex gap-4">
-                {socialLinks.map((social) => (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="p-3 bg-accent/20 rounded-lg text-accent hover:bg-accent hover:text-white transition-all duration-300"
-                  >
-                    <social.icon size={20} />
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
           </motion.div>
         </div>
       </div>

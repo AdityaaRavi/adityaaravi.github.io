@@ -68,7 +68,7 @@ const Hero = () => {
               <Mail size={20} />
               Get In Touch
             </motion.button>
-            
+
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -79,6 +79,17 @@ const Hero = () => {
             >
               <Linkedin size={20} />
               LinkedIn
+            </motion.a>
+
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href="/resume/Adityaa_resume_2025.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="glass px-8 py-4 rounded-full text-text-primary font-semibold flex items-center gap-2 hover:bg-accent/20 transition-all duration-300"
+            >
+              View Resume
             </motion.a>
           </motion.div>
 

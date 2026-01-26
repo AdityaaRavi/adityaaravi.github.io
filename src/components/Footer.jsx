@@ -26,7 +26,7 @@ const Footer = () => {
               Adityaa Ravi
             </h3>
             <p className="text-text-secondary text-sm max-w-md">
-              Software Engineer on PayPal&apos;s Identity team | UC Davis alum | Exploring AI, systems, and impact.
+              Software Engineer on PayPal&apos;s Identity team | UC Davis alum | Exploring large-scale software and impactful AI systems.
             </p>
           </motion.div>
 
