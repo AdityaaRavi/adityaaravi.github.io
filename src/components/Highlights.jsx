@@ -67,25 +67,22 @@ const Highlights = () => {
 
   useEffect(() => {
     if (photos.length === 0) return
+    const nextIndex = (currentIndex + 1) % photos.length
+    const preloadTargets = [
+      photos[currentIndex]?.src,
+      photos[nextIndex]?.src,
+    ].filter(Boolean)
 
-    photos.forEach((photo) => {
-      const src = photo?.src
-      if (!src || preloaded.current.has(src)) return
+    preloadTargets.forEach((src) => {
+      if (preloaded.current.has(src)) return
       const img = new Image()
+      img.decoding = 'async'
       img.src = src
+      if (typeof img.decode === 'function') {
+        img.decode().catch(() => {})
+      }
       preloaded.current.add(src)
     })
-  }, [photos])
-
-  useEffect(() => {
-    if (photos.length === 0) return
-    const nextIndex = (currentIndex + 1) % photos.length
-    const nextSrc = photos[nextIndex]?.src
-    if (!nextSrc || preloaded.current.has(nextSrc)) return
-
-    const img = new Image()
-    img.src = nextSrc
-    preloaded.current.add(nextSrc)
   }, [currentIndex, photos])
 
   useEffect(() => {
@@ -175,6 +172,8 @@ const Highlights = () => {
                     src={activePhoto?.src}
                     alt={activePhoto?.title || 'Highlight photo'}
                     className="absolute inset-0 h-full w-full object-contain sm:object-cover"
+                    loading={hasEntered ? 'eager' : 'lazy'}
+                    decoding="async"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
