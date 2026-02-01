@@ -19,6 +19,12 @@ function App() {
   }, [])
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const isCoarsePointer = window.matchMedia('(pointer: coarse)')
+    if (prefersReducedMotion.matches || isCoarsePointer.matches) {
+      return undefined
+    }
+
     let frameId = null
     let timeoutId = null
     let currentX = window.innerWidth / 2
@@ -27,6 +33,22 @@ function App() {
     let targetY = currentY
     let width = window.innerWidth
     let height = window.innerHeight
+    let lastTimestamp = 0
+    let isAnimating = false
+
+    const applyParallax = () => {
+      const dx = currentX - width / 2
+      const dy = currentY - height / 2
+
+      document.documentElement.style.setProperty('--mouse-x', `${currentX}px`)
+      document.documentElement.style.setProperty('--mouse-y', `${currentY}px`)
+      document.documentElement.style.setProperty('--parallax-x', `${dx * 0.04}px`)
+      document.documentElement.style.setProperty('--parallax-y', `${dy * 0.04}px`)
+      document.documentElement.style.setProperty('--parallax-x-2', `${dx * 0.08}px`)
+      document.documentElement.style.setProperty('--parallax-y-2', `${dy * 0.08}px`)
+      document.documentElement.style.setProperty('--parallax-x-3', `${dx * 0.12}px`)
+      document.documentElement.style.setProperty('--parallax-y-3', `${dy * 0.12}px`)
+    }
 
     const updateSize = () => {
       width = window.innerWidth
@@ -44,37 +66,47 @@ function App() {
       }
       timeoutId = window.setTimeout(() => {
         document.documentElement.style.setProperty('--activity', '0')
+        isAnimating = false
+        if (frameId) {
+          window.cancelAnimationFrame(frameId)
+          frameId = null
+        }
       }, 800)
+
+      if (!isAnimating) {
+        isAnimating = true
+        frameId = window.requestAnimationFrame(animate)
+      }
     }
 
-    const animate = () => {
+    const animate = (timestamp) => {
+      if (!isAnimating) return
+      if (timestamp - lastTimestamp < 33) {
+        frameId = window.requestAnimationFrame(animate)
+        return
+      }
+      lastTimestamp = timestamp
+
       const ease = 0.06
       currentX += (targetX - currentX) * ease
       currentY += (targetY - currentY) * ease
 
-      const dx = currentX - width / 2
-      const dy = currentY - height / 2
-
-      document.documentElement.style.setProperty('--mouse-x', `${currentX}px`)
-      document.documentElement.style.setProperty('--mouse-y', `${currentY}px`)
-      document.documentElement.style.setProperty('--parallax-x', `${dx * 0.04}px`)
-      document.documentElement.style.setProperty('--parallax-y', `${dy * 0.04}px`)
-      document.documentElement.style.setProperty('--parallax-x-2', `${dx * 0.08}px`)
-      document.documentElement.style.setProperty('--parallax-y-2', `${dy * 0.08}px`)
-      document.documentElement.style.setProperty('--parallax-x-3', `${dx * 0.12}px`)
-      document.documentElement.style.setProperty('--parallax-y-3', `${dy * 0.12}px`)
+      applyParallax()
 
       frameId = window.requestAnimationFrame(animate)
     }
 
     document.documentElement.style.setProperty('--activity', '0')
+    applyParallax()
 
     window.addEventListener('pointermove', handleMove, { passive: true })
     window.addEventListener('resize', updateSize)
-    frameId = window.requestAnimationFrame(animate)
 
     return () => {
-      window.cancelAnimationFrame(frameId)
+      isAnimating = false
+      if (frameId) {
+        window.cancelAnimationFrame(frameId)
+      }
       if (timeoutId) {
         window.clearTimeout(timeoutId)
       }

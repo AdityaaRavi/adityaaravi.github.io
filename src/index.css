@@ -75,9 +75,15 @@ body {
   background-clip: text;
 }
 
-/* Smooth transitions */
-* {
-  transition: all 0.3s ease;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Custom animations */
@@ -121,6 +127,7 @@ body {
   transform: translate3d(var(--parallax-x), var(--parallax-y), 0);
   mix-blend-mode: screen;
   animation: gridDrift 18s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 .grid-layer--mid {
@@ -152,6 +159,7 @@ body {
   );
   transform: translate3d(var(--parallax-x-2), var(--parallax-y-2), 0);
   animation: cloudDrift 24s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 .cloud--one {
@@ -177,6 +185,7 @@ body {
   opacity: calc(0.02 + var(--activity) * 0.35);
   transition: opacity 0.8s ease;
   transform: translate3d(var(--parallax-x), var(--parallax-y), 0);
+  will-change: transform, opacity;
 }
 
 .motif--nn {
