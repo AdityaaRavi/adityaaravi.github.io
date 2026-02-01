@@ -142,10 +142,10 @@ const Highlights = () => {
 
         <div className="max-w-5xl mx-auto" ref={containerRef}>
           <div
-            className="glass-card rounded-2xl p-4 sm:p-6 relative overflow-hidden"
+            className="relative overflow-hidden sm:glass-card sm:rounded-2xl sm:p-6"
           >
             <div
-              className="relative aspect-[16/10] rounded-xl overflow-hidden bg-dark-bg/60"
+              className="relative aspect-[4/5] sm:aspect-[16/10] sm:rounded-xl overflow-hidden bg-dark-bg/60"
               onClick={() => setIsPaused((prev) => !prev)}
               role="button"
               tabIndex={0}
@@ -186,8 +186,8 @@ const Highlights = () => {
             </div>
 
             {activePhoto && (
-              <div className="mt-4 sm:mt-6">
-                <div className="glass rounded-xl px-4 py-3 text-left">
+              <div className="mt-4 sm:mt-6 px-4 sm:px-0">
+                <div className="glass sm:rounded-xl px-4 py-3 text-left">
                   <p className="text-sm uppercase tracking-wide text-accent mb-1">
                     {activePhoto.title}
                   </p>
@@ -198,7 +198,7 @@ const Highlights = () => {
               </div>
             )}
 
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 px-4 sm:px-0">
               <div className="flex items-center gap-3">
                 <button
                   type="button"
