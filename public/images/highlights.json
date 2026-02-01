@@ -44,5 +44,10 @@
         "src": "/images/cs-tutoring/cs-tut-research-symposium.jpeg",
         "title": "Founding Organizer, CS Research Symposium",
         "description": "Helped launch UC Davis’s first CS Research Symposium to make undergraduate research accessible across the department."
+    },
+    {
+        "src": "/images/gdsc/gdsc-info-session.jpeg",
+        "title": "President, Google Developer Student Club at UC Davis (Also known as GDG on Campus)",
+        "description": "Led and mentored a team of 30+ students to organize workshops on various Google technologies to help prepare UCD students for the industry."
     }
 ]
