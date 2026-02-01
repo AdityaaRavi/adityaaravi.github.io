@@ -2,14 +2,17 @@ import React, { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
 
-const ROTATION_MS = 6000
+const DEFAULT_ROTATION_MS = 6000
 
 const Highlights = () => {
   const [photos, setPhotos] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [hasEntered, setHasEntered] = useState(false)
   const preloaded = useRef(new Set())
+  const observerRef = useRef(null)
+  const containerRef = useRef(null)
 
   useEffect(() => {
     let isMounted = true
@@ -42,17 +45,25 @@ const Highlights = () => {
     }
   }, [])
 
+  const getDurationMs = (photo) => {
+    if (!photo) return DEFAULT_ROTATION_MS
+    if (typeof photo.durationSeconds === 'number' && photo.durationSeconds > 0) {
+      return photo.durationSeconds * 1000
+    }
+    return DEFAULT_ROTATION_MS
+  }
+
   useEffect(() => {
-    if (isPaused || photos.length < 2) {
+    if (!hasEntered || isPaused || photos.length < 2) {
       return undefined
     }
 
-    const intervalId = window.setInterval(() => {
+    const timeoutId = window.setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % photos.length)
-    }, ROTATION_MS)
+    }, getDurationMs(photos[currentIndex]))
 
-    return () => window.clearInterval(intervalId)
-  }, [isPaused, photos.length])
+    return () => window.clearTimeout(timeoutId)
+  }, [hasEntered, isPaused, photos, currentIndex])
 
   useEffect(() => {
     if (photos.length === 0) return
@@ -76,6 +87,24 @@ const Highlights = () => {
     img.src = nextSrc
     preloaded.current.add(nextSrc)
   }, [currentIndex, photos])
+
+  useEffect(() => {
+    if (!containerRef.current) return
+
+    observerRef.current = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasEntered(true)
+          observerRef.current?.disconnect()
+        }
+      },
+      { threshold: 0.35 }
+    )
+
+    observerRef.current.observe(containerRef.current)
+
+    return () => observerRef.current?.disconnect()
+  }, [])
 
   const handlePrev = () => {
     if (photos.length === 0) return
@@ -111,13 +140,23 @@ const Highlights = () => {
           </p>
         </motion.div>
 
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto" ref={containerRef}>
           <div
             className="glass-card rounded-2xl p-4 sm:p-6 relative overflow-hidden"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
           >
-            <div className="relative aspect-[16/10] rounded-xl overflow-hidden bg-dark-bg/60">
+            <div
+              className="relative aspect-[16/10] rounded-xl overflow-hidden bg-dark-bg/60"
+              onClick={() => setIsPaused((prev) => !prev)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault()
+                  setIsPaused((prev) => !prev)
+                }
+              }}
+              aria-label={isPaused ? 'Play highlights' : 'Pause highlights'}
+            >
               {isLoading ? (
                 <div className="h-full w-full flex items-center justify-center text-text-secondary">
                   Loading highlights...
@@ -203,6 +242,7 @@ const Highlights = () => {
                 ))}
               </div>
             </div>
+
           </div>
         </div>
       </div>
