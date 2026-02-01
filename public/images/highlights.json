@@ -1,0 +1,53 @@
+[
+    {
+        "src": "/images/paypal/pypl-headquarters.jpeg",
+        "title": "Software Engineer, PayPal Identity",
+        "description": "Backend engineer on PayPal’s Identity Platform, building and operating large-scale, mission-critical systems used across global merchant and consumer flows.",
+        "durationSeconds": 8
+    },
+    {
+        "src": "/images/outstanding-senior-award/outstanding-senior-1.jpeg",
+        "title": "Outstanding Senior Award (UC Davis College of Engineering)",
+        "description": "Awarded to one graduating senior per major in recognition of community impact through leadership."
+    },
+    {
+        "src": "/images/ucd/graduation-walk.jpeg",
+        "title": "Graduation, UC Davis",
+        "description": "Graduated with Honors with a B.S. in Computer Science and Engineering, focused on building reliable systems and applied AI."
+    },
+    {
+        "src": "/images/ucd/gamification-urc-presentation.jpeg",
+        "title": "Undergraduate Research Conference Presenter",
+        "description": "Presented research on using gamification to improve engagement and learning outcomes in introductory AI education."
+    },
+    {
+        "src": "/images/sachacks/sachacks-V-team.jpeg",
+        "title": "President, SacHacks V",
+        "description": "Led a cross-functional organizing team to revive and scale an international entrepreneurship hackathon with 600+ participants."
+    },
+    {
+        "src": "/images/sachacks/sachacks-go-live.jpeg",
+        "title": "Going Live at SacHacks V",
+        "description": "Moments before the opening ceremony went live, coordinating speakers, livestreams, and last-minute logistics for a global hackathon."
+    },
+    {
+        "src": "/images/sachacks/hackcon-sachacks-feature.jpeg",
+        "title": "Featured at MLH Hackcon X",
+        "description": "SacHacks was featured during Major League Hacking’s 2023 season kickoff, highlighting its growth and community impact."
+    },
+    {
+        "src": "/images/cs-tutoring/cs-tut-aggie-day-24.jpeg",
+        "title": "President, CS Tutoring Club",
+        "description": "Led a 50+ tutor organization providing free, peer-led CS tutoring in partnership with the UC Davis Computer Science department."
+    },
+    {
+        "src": "/images/cs-tutoring/cs-tut-research-symposium.jpeg",
+        "title": "Founding Organizer, CS Research Symposium",
+        "description": "Helped launch UC Davis’s first CS Research Symposium to make undergraduate research accessible across the department."
+    },
+    {
+        "src": "/images/gdsc/gdsc-info-session.jpeg",
+        "title": "President, Google Developer Student Club at UC Davis (Also known as GDG on Campus)",
+        "description": "Led and mentored a team of 30+ students to organize workshops on various Google technologies to help prepare UCD students for the industry."
+    }
+]
