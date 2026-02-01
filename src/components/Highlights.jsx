@@ -145,7 +145,7 @@ const Highlights = () => {
             className="relative overflow-hidden sm:glass-card sm:rounded-2xl sm:p-6"
           >
             <div
-              className="relative aspect-[4/5] sm:aspect-[16/10] sm:rounded-xl overflow-hidden bg-dark-bg/60"
+              className="relative aspect-[4/5] sm:aspect-[16/10] sm:rounded-xl overflow-hidden bg-transparent sm:bg-dark-bg/60"
               onClick={() => setIsPaused((prev) => !prev)}
               role="button"
               tabIndex={0}
@@ -174,7 +174,7 @@ const Highlights = () => {
                     key={activePhoto?.src}
                     src={activePhoto?.src}
                     alt={activePhoto?.title || 'Highlight photo'}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="absolute inset-0 h-full w-full object-contain sm:object-cover"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
