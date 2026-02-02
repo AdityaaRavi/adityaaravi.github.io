@@ -1,6 +1,6 @@
 {
   "name": "personal-website",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Personal website with modern dark theme and glassmorphic design",
   "main": "index.js",
   "scripts": {
